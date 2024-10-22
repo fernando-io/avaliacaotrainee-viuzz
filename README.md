@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# Avaliação Trainee Viuzz
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto é um website utilizando React, criado como parte de uma avaliação. A ideia é ser um website com 3 telas (login, cadstro e funcionários), onde o usuário deverá ser capaz de fazer login, cadastrar novo funcionário e verificar a lista dos funcionários (podendo excluir ou alterar os funcionários cadastrados).
 
-## Available Scripts
+Dentre os requisitos solicitados para avaliação, estão:
+- Apenas usuários autenticados deverão ter acesso as telas de cadastro e funcionários.
+- O formulário de login deverá contar com os seguintes campos: email, senha.
+- O formulário de cadastro de funcionário deverá conter os seguintes campos: nome, cidade, cargo.
+- Na tela de cadastro deverá feita requisição para o link
+https://servicodados.ibge.gov.br/api/v1/localidades/distritos, e utilizado o resultado para preencher o campo select “cidade” do funcionário a ser cadastrado.
+- Os dados da aplicação precisam ser salvos de forma persistente no localstorage.
 
-In the project directory, you can run:
+Diferenciais avaliativos:
+- A reutilização de componentes.
+- MaterialUI e styled-components.
+- TypeScript.
 
-### `npm start`
+## Requisitos para rodar o projeto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Certifique-se de ter o Node.js e o npm instalados em sua máquina. Você pode baixá-los em [nodejs.org](https://nodejs.org/).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Instalação
 
-### `npm test`
+Para instalar as dependências necessárias, execute os seguintes comandos no diretório do projeto:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Faça o clone deste repositório em sua máquina:
+   Abra o Git Bash na pasta onde deseja instalar o projeto e utilize o comando abaixo.
+   
+   git clone https://github.com/fernando-io/avaliacao-viuzz.git
 
-### `npm run build`
+2. Abra a pasta do projeto (\avaliacao-viuzz) no VSCode e abra o terminal.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. No terminal, instale as dependências do projeto com o comando:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Ainda no terminal, inicialize o projeto utilizando o comando:
+   
+   npm start
 
-### `npm run eject`
+   Aguarde e abra o link local fornecido no terminal. Você será redirecionado para o website do projeto, no seu navegador.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Dependências
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+As dependências do projeto são:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **@emotion/react**: Biblioteca para CSS-in-JS.
+- **@emotion/styled**: Estilização de componentes usando Emotion.
+- **@mui/material**: Componentes de UI Material-UI.
+- **@mui/styled-engine-sc**: Estilização de componentes usando Styled Components com Material-UI.
+- **react**: Biblioteca principal para construir interfaces.
+- **react-dom**: Biblioteca para interagir com o DOM.
+- **react-router-dom**: Biblioteca para roteamento em aplicativos React.
+- **styled-components**: Estilização de componentes usando Styled Components.
+- **typescript**: Suporte para TypeScript.
+- **web-vitals**: Ferramenta para medir a performance da aplicação.
