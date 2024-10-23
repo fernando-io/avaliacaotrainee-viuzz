@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from
 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
 import { AppBar, Toolbar, Button } from '@mui/material';
-import Login from './components/login';
-import Cadastro from './components/cadastro'; 
-import Funcionarios from './components/funcionarios';
+import Login from './pages/login';
+import Cadastro from './pages/cadastro'; 
+import Funcionarios from './pages/funcionarios';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
