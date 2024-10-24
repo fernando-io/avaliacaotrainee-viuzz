@@ -6,6 +6,13 @@ interface Cidade {
     nome: string;
 }
 
+interface Funcionario {
+    id: number;
+    nome: string;
+    cidade: string;
+    cargo: string;
+}
+
 const Cadastro = () => {
     const [nome, setNome] = useState('');
     const [cidade, setCidade] = useState('');
@@ -22,11 +29,33 @@ const Cadastro = () => {
             .catch(error => console.error('Erro ao buscar cidade', error));
     }, []);
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        const novoFuncionario: Funcionario = {
+            id: Date.now(),
+            nome,
+            cidade,
+            cargo
+        };
+
+        const funcionariosSalvos = localStorage.getItem('funcionarios');
+        const listaDeFuncionarios: Funcionario[] = funcionariosSalvos ? JSON.parse(funcionariosSalvos) : [];
+        
+        listaDeFuncionarios.push(novoFuncionario);
+
+        localStorage.setItem('funcionarios', JSON.stringify(listaDeFuncionarios));
+
+        setNome('');
+        setCidade('');
+        setCargo('');
+    };
+
     return (
         <Container>
             <Box>
                 <h1>Cadastre um Novo Funcionário</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <TextField
                         label="Nome"
                         type="text"
