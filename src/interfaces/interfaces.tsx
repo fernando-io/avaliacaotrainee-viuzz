@@ -1,3 +1,7 @@
+export interface LoginProps {
+    onLogin: () => void;
+}
+
 export interface Funcionario {
     id: number;
     nome: string;

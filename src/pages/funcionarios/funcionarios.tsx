@@ -1,69 +1,38 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Button, Paper, Dialog, DialogActions, DialogContent, DialogTitle, TextField, FormControl, InputLabel, Select, MenuItem  } from '@mui/material';
-import { Funcionario } from '../interfaces/interfaces';
-import { Cidade } from '../interfaces/interfaces';
+import { Typography, Grid2, Paper, Dialog, DialogActions, DialogContent, DialogTitle, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Funcionario } from '../../interfaces/interfaces';
+import { useFuncionariosHandler } from './funcionariosHandler';
+import { CustomButton } from '../../components/button/customButton';
 
 const Funcionarios = () => {
-    const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
+    const { funcionarios, cidades, handleDelete, handleUpdate } = useFuncionariosHandler();
     const [openEditDialog, setOpenEditDialog] = useState(false);
     const [funcionarioEdit, setFuncionarioEdit] = useState<Partial<Funcionario>>({});
-    const [cidades, setCidades] = useState<Cidade[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
-    useEffect(() => {
-        fetch('https://servicodados.ibge.gov.br/api/v1/localidades/distritos')
-            .then(response => response.json())
-            .then((data: Cidade[]) => {
-                const cidadesOrdenadas = data.sort((a, b) => a.nome.localeCompare(b.nome));
-                setCidades(cidadesOrdenadas);
-            })
-            .catch(error => console.error('Erro ao buscar cidade', error));
-    }, []);
-
-    useEffect(() => {
-        const funcionariosSalvos = localStorage.getItem('funcionarios');
-        if (funcionariosSalvos) {
-            setFuncionarios(JSON.parse(funcionariosSalvos));
-        }
-    }, []);
-
-    const handleDelete = (id: number) => {
-        const updatedFuncionarios = funcionarios.filter(funcionario => funcionario.id !== id);
-        setFuncionarios(updatedFuncionarios);
-        localStorage.setItem('funcionarios', JSON.stringify(updatedFuncionarios));
-    };
-
-    const handleEdit = (funcionario: Funcionario) => {
-        setFuncionarioEdit(funcionario);
-        setOpenEditDialog(true);
-    };
-
-    const handleUpdate = () => {
-        const updatedFuncionarios = funcionarios.map(funcionario =>
-            funcionario.id === funcionarioEdit.id ? { ...funcionarioEdit } as Funcionario : funcionario
-        );
-        setFuncionarios(updatedFuncionarios);
-        localStorage.setItem('funcionarios', JSON.stringify(updatedFuncionarios));
-        setOpenEditDialog(false);
-    };
+    const filteredFuncionarios = funcionarios.filter(funcionario =>
+        funcionario.nome.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const columns: GridColDef[] = [
-        { 
-            field: 'nome', 
-            headerName: 'Nome', 
+        {
+            field: 'nome',
+            headerName: 'Nome',
             type: 'string',
-            width: 150 },
+            width: 200,
+        },
         {
             field: 'cidade',
             headerName: 'Cidade',
             type: 'string',
-            width: 150,
+            width: 200,
         },
         {
             field: 'cargo',
             headerName: 'Cargo',
             type: 'string',
-            width: 150,
+            width: 200,
         },
         {
             field: 'actions',
@@ -71,21 +40,22 @@ const Funcionarios = () => {
             width: 200,
             renderCell: (params) => (
                 <>
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
-                        onClick={() => handleEdit(params.row)}
-                        style={{ marginRight: 8 }}
+                    <CustomButton
+                        onClick={() => {
+                            setFuncionarioEdit(params.row);
+                            setOpenEditDialog(true);
+                        }}
+                        style={{ marginRight: 8, width: '85px' }}
                     >
                         Editar
-                    </Button>
-                    <Button 
-                        variant="contained" 
-                        color="secondary" 
+                    </CustomButton>
+                    <CustomButton
+                        color="secondary"
                         onClick={() => handleDelete(params.row.id)}
+                        style={{ width: '85px' }}
                     >
                         Deletar
-                    </Button>
+                    </CustomButton>
                 </>
             )
         }
@@ -94,17 +64,25 @@ const Funcionarios = () => {
     const paginationModel = { page: 0, pageSize: 5 };
 
     return (
-        <>
-            <Paper sx={{ height: 400, width: 650 }}>
+        <Grid2 container spacing={1} direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '80vh' }}>
+            <Typography variant="h4" gutterBottom>Lista de Funcionários</Typography>
+            <Paper sx={{ height: 400, width: 800 }}>
+                <TextField
+                    label="Buscar por Nome"
+                    variant="outlined"
+                    fullWidth
+                    margin="dense"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
                 <DataGrid
-                    rows={funcionarios}
+                    rows={filteredFuncionarios}
                     columns={columns}
                     initialState={{ pagination: { paginationModel } }}
                     pageSizeOptions={[5, 10]}
                     sx={{ border: 0 }}
                 />
             </Paper>
-            
             <Dialog open={openEditDialog} onClose={() => setOpenEditDialog(false)}>
                 <DialogTitle>Editar Funcionário</DialogTitle>
                 <DialogContent>
@@ -137,16 +115,19 @@ const Funcionarios = () => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => setOpenEditDialog(false)} color="primary">
+                    <CustomButton onClick={() => setOpenEditDialog(false)}>
                         Cancelar
-                    </Button>
-                    <Button onClick={handleUpdate} color="primary" variant="contained">
+                    </CustomButton>
+                    <CustomButton onClick={() => {
+                        handleUpdate(funcionarioEdit);
+                        setOpenEditDialog(false);
+                    }}>
                         Salvar
-                    </Button>
+                    </CustomButton>
                 </DialogActions>
             </Dialog>
-        </>
+        </Grid2>
     );
-}
+};
 
 export default Funcionarios;

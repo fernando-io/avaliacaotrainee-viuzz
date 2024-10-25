@@ -43,10 +43,9 @@ As dependências do projeto são:<br><br>
 - **@emotion/react**: Biblioteca para CSS-in-JS.<br>
 - **@emotion/styled**: Estilização de componentes usando Emotion.<br>
 - **@mui/material**: Componentes de UI Material-UI.<br>
-- **@mui/styled-engine-sc**: Estilização de componentes usando Styled Components com Material-UI.<br>
+- **@mui/x-data-grid**: Componente para tabelas e grids altamente personalizáveis no Material-UI.<br>
 - **react**: Biblioteca principal para construir interfaces.<br>
 - **react-dom**: Biblioteca para interagir com o DOM.<br>
 - **react-router-dom**: Biblioteca para roteamento em aplicativos React.<br>
-- **styled-components**: Estilização de componentes usando Styled Components.<br>
 - **typescript**: Suporte para TypeScript.<br>
 - **web-vitals**: Ferramenta para medir a performance da aplicação.<br>
