@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Box, TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
-
-interface Cidade {
-    id: number;
-    nome: string;
-}
-
-interface Funcionario {
-    id: number;
-    nome: string;
-    cidade: string;
-    cargo: string;
-}
+import { Funcionario } from '../interfaces/interfaces';
+import { Cidade } from '../interfaces/interfaces';
 
 const Cadastro = () => {
     const [nome, setNome] = useState('');
