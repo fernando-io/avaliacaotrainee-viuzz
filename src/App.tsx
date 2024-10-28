@@ -16,13 +16,6 @@ function App() {
 
   return (
     <Router>
-      <AppBar position="static">
-        <Toolbar>
-          <Button color="inherit" component={RouterLink} to="/login">Login</Button>
-          <Button color="inherit" component={RouterLink} to="/cadastro">Cadastro de Funcionários</Button>
-          <Button color="inherit" component={RouterLink} to="/funcionarios">Lista de Funcionários</Button>
-        </Toolbar>
-      </AppBar>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />

@@ -25,12 +25,12 @@ export const useFuncionariosHandler = () => {
 
     const handleDelete = (id: number) => {
         const updatedFuncionarios = funcionarios.filter(funcionario => funcionario.id !== id);
+        alert('Funcionário deletado com sucesso!');
         setFuncionarios(updatedFuncionarios);
         localStorage.setItem('funcionarios', JSON.stringify(updatedFuncionarios));
     };
 
     const handleEdit = (funcionario: Funcionario) => {
-        // Retornar um objeto com as funções de edição
         return funcionario;
     };
 
