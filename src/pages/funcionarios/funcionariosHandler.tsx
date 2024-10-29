@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Funcionario } from '../../interfaces/interfaces';
 import { Cidade } from '../../interfaces/interfaces';
+import { useAlert } from '../../contexts/alertContext';
 
 export const useFuncionariosHandler = () => {
     const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
     const [cidades, setCidades] = useState<Cidade[]>([]);
+    const { showAlert } = useAlert();
     
     useEffect(() => {
         fetch('https://servicodados.ibge.gov.br/api/v1/localidades/distritos')
@@ -25,7 +27,7 @@ export const useFuncionariosHandler = () => {
 
     const handleDelete = (id: number) => {
         const updatedFuncionarios = funcionarios.filter(funcionario => funcionario.id !== id);
-        alert('Funcionário deletado com sucesso!');
+        showAlert('Funcionário deletado com sucesso!', 'warning');
         setFuncionarios(updatedFuncionarios);
         localStorage.setItem('funcionarios', JSON.stringify(updatedFuncionarios));
     };
@@ -38,6 +40,7 @@ export const useFuncionariosHandler = () => {
         const updatedFuncionarios = funcionarios.map(funcionario =>
             funcionario.id === funcionarioEdit.id ? { ...funcionarioEdit } as Funcionario : funcionario
         );
+        showAlert('Funcionário atualizado com sucesso!', 'success');
         setFuncionarios(updatedFuncionarios);
         localStorage.setItem('funcionarios', JSON.stringify(updatedFuncionarios));
     };

@@ -4,17 +4,19 @@ import { Grid2, Typography, Box, TextField, FormControl, InputLabel, Select, Men
 import { useCadastroHandler } from './cadastroHandler';
 import { CustomButton } from '../../components/button/customButton';
 import NavBar from '../../components/navBar/navBar';
+import { useAlert } from '../../contexts/alertContext';
 
 const Cadastro: React.FC = () => {
     const [nome, setNome] = useState('');
     const [cidade, setCidade] = useState('');
     const [cargo, setCargo] = useState('');
     const { cidades, cadastrarFuncionario } = useCadastroHandler();
+    const { showAlert } = useAlert();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         cadastrarFuncionario(nome, cidade, cargo);
-        alert('Funcionário cadastrado com sucesso!\nVá até a lista de funcionários para visualizá-lo.');
+        showAlert('Funcionário cadastrado com sucesso!\nVá até a lista de funcionários para visualizá-lo.', 'success');
         setNome('');
         setCidade('');
         setCargo('');
@@ -23,11 +25,11 @@ const Cadastro: React.FC = () => {
     return (
         <>
             <NavBar />
-            <Grid2 container spacing={1} direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '60vh' }}>
+            <Grid2 container spacing={1} display="flex" direction="column" justifyContent="center" alignItems="center" sx={{minHeight: '80vh'}}>
                 <Typography variant="h4" gutterBottom>Cadastre um Novo Funcionário</Typography>
                 <Box component="form" onSubmit={handleSubmit} sx={{ width: '400px' }}>
                     <Grid2 container spacing={1} direction="column">
-                        <Grid2 component="div">
+                        <Grid2>
                             <TextField
                                 label="Nome"
                                 type="text"
@@ -37,7 +39,7 @@ const Cadastro: React.FC = () => {
                                 fullWidth
                             />
                         </Grid2>
-                        <Grid2 component="div">
+                        <Grid2>
                             <FormControl fullWidth required>
                                 <InputLabel>Cidade</InputLabel>
                                 <Select
@@ -56,7 +58,7 @@ const Cadastro: React.FC = () => {
                                 </Select>
                             </FormControl>
                         </Grid2>
-                        <Grid2 component="div">
+                        <Grid2>
                             <TextField
                                 label="Cargo"
                                 type="text"
@@ -66,7 +68,7 @@ const Cadastro: React.FC = () => {
                                 fullWidth
                             />
                         </Grid2>
-                        <Grid2 component="div">
+                        <Grid2>
                             <CustomButton
                                 type="submit"
                                 style={{ width: '100%' }}

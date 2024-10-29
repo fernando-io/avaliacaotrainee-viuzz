@@ -10,7 +10,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     const handleLogin = useLoginHandler(onLogin);
 
     return (
-        <Grid2 container spacing={1} direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '75vh' }}>
+        <Grid2 container spacing={1} direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '80vh' }}>
             <Typography variant="h4" gutterBottom>Faça seu Login</Typography>
             <Box component="form" onSubmit={(e) => handleLogin(e, email, senha)} sx={{ width: '400px' }}>
                 <Grid2 container spacing={1} direction="column">

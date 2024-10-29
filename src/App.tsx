@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from
 import Login from './pages/login/login';
 import Cadastro from './pages/cadastro/cadastro'; 
 import Funcionarios from './pages/funcionarios/funcionarios';
+import { AlertProvider } from './contexts/alertContext';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -13,6 +14,7 @@ function App() {
   };
 
   return (
+    <AlertProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
@@ -20,7 +22,8 @@ function App() {
         <Route path="/cadastro" element={isAuthenticated ? <Cadastro /> : <Login onLogin={handleLogin} />} />
         <Route path="/funcionarios" element={isAuthenticated ? <Funcionarios /> : <Login onLogin={handleLogin} />} />
       </Routes>
-  </Router>
+    </Router>
+    </AlertProvider>
   );
 }
 
