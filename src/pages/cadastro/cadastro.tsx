@@ -41,6 +41,7 @@ const Cadastro: React.FC = () => {
                             <FormControl fullWidth required>
                                 <InputLabel>Cidade</InputLabel>
                                 <Select
+                                    label="Cidade"
                                     value={cidade}
                                     onChange={(e) => setCidade(e.target.value)}
                                 >

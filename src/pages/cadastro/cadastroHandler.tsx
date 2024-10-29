@@ -1,4 +1,3 @@
-// cadastroHandler.tsx
 import { useEffect, useState } from 'react';
 import { Funcionario } from '../../interfaces/interfaces';
 import { Cidade } from '../../interfaces/interfaces';

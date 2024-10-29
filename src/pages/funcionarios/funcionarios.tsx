@@ -99,6 +99,7 @@ const Funcionarios = () => {
                         <FormControl fullWidth margin="dense" required>
                             <InputLabel>Cidade</InputLabel>
                             <Select
+                                label="Cidade"
                                 value={funcionarioEdit.cidade || ''}
                                 onChange={(e) => setFuncionarioEdit({ ...funcionarioEdit, cidade: e.target.value })}
                             >

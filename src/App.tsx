@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 
 'react-router-dom';
-import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar, Button } from '@mui/material';
 import Login from './pages/login/login';
 import Cadastro from './pages/cadastro/cadastro'; 
 import Funcionarios from './pages/funcionarios/funcionarios';
