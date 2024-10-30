@@ -1,5 +1,5 @@
 export interface LoginProps {
-    onLogin: () => void;
+    loginFn: () => void;
 }
 
 export interface Funcionario {

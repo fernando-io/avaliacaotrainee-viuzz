@@ -1,10 +1,11 @@
 // cadastro.tsx
 import React, { useState } from 'react';
-import { Grid2, Typography, Box, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Grid2, Typography, Box, TextField, FormControl, Autocomplete, InputLabel, Select, MenuItem } from '@mui/material';
 import { useCadastroHandler } from './cadastroHandler';
 import { CustomButton } from '../../components/button/customButton';
 import NavBar from '../../components/navBar/navBar';
 import { useAlert } from '../../contexts/alertContext';
+import { useIbgeApi } from '../../hooks/ibgeApi';
 
 const Cadastro: React.FC = () => {
     const [nome, setNome] = useState('');
@@ -41,6 +42,12 @@ const Cadastro: React.FC = () => {
                         </Grid2>
                         <Grid2>
                             <FormControl fullWidth required>
+                                {/* <Autocomplete 
+                                    disablePortal
+                                    options={cidades}
+                                    sx={{ width: 300 }}
+                                    renderInput={(params) => <TextField {...params} label="Cidade" />}
+                                /> */}
                                 <InputLabel>Cidade</InputLabel>
                                 <Select
                                     label="Cidade"

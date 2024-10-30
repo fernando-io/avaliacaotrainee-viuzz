@@ -18,9 +18,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/cadastro" element={isAuthenticated ? <Cadastro /> : <Login onLogin={handleLogin} />} />
-        <Route path="/funcionarios" element={isAuthenticated ? <Funcionarios /> : <Login onLogin={handleLogin} />} />
+        <Route path="/login" element={<Login loginFn={handleLogin} />} />
+        <Route path="/cadastro" element={isAuthenticated ? <Cadastro /> : <Login loginFn={handleLogin} />} />
+        <Route path="/funcionarios" element={isAuthenticated ? <Funcionarios /> : <Login loginFn={handleLogin} />} />
       </Routes>
     </Router>
     </AlertProvider>

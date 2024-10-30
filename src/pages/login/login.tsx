@@ -4,10 +4,10 @@ import { useLoginHandler } from './loginHandler';
 import { CustomButton } from '../../components/button/customButton';
 import { Grid2, Typography, Box, TextField } from '@mui/material';
 
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+const Login: React.FC<LoginProps> = ({ loginFn }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    const handleLogin = useLoginHandler(onLogin);
+    const handleLogin = useLoginHandler(loginFn);
 
     return (
         <Grid2 container spacing={1} direction="column" justifyContent="center" alignItems="center" style={{ minHeight: '80vh' }}>

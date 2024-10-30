@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from '../../contexts/alertContext';
 
-export const useLoginHandler = (onLogin: () => void) => {
+export const useLoginHandler = (loginFn: () => void) => {
     const navigate = useNavigate();
     const { showAlert } = useAlert();
 
@@ -10,7 +10,7 @@ export const useLoginHandler = (onLogin: () => void) => {
 
         if (email === 'teste@admin.com' && senha === 'admin') {
             showAlert('Login realizado!', 'success');
-            onLogin();
+            loginFn();
             navigate('/funcionarios');
         } else {
             showAlert('Email ou senha incorretos!', 'error');
