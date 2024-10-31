@@ -2,16 +2,16 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { Alert } from '@mui/material';
 
 interface AlertContextProps {
-    showAlert: (message: string, severity: 'success' | 'error' | 'warning') => void;
+    showAlert: (message: string, severity: 'success' | 'error') => void;
 }
 
 const AlertContext = createContext<AlertContextProps | undefined>(undefined);
 
 export const AlertProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [alert, setAlert] = useState<{ message: string; severity: 'success' | 'error' | 'warning' } | null>(null);
+    const [alert, setAlert] = useState<{ message: string; severity: 'success' | 'error' } | null>(null);
     const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout> | null>(null);
 
-    const showAlert = (message: string, severity: 'success' | 'error' | 'warning') => {
+    const showAlert = (message: string, severity: 'success' | 'error') => {
         if (timeoutId) {
             clearTimeout(timeoutId);
         }

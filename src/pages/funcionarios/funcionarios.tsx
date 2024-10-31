@@ -10,6 +10,8 @@ const Funcionarios = () => {
     const { funcionarios, cidades, handleDelete, handleUpdate } = useFuncionariosHandler();
     const [openEditDialog, setOpenEditDialog] = useState(false);
     const [funcionarioEdit, setFuncionarioEdit] = useState<Partial<Funcionario>>({});
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+    const [funcionarioDelete, setFuncionarioDelete] = useState<Funcionario | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
 
     const filteredFuncionarios = funcionarios.filter(funcionario =>
@@ -52,7 +54,10 @@ const Funcionarios = () => {
                     </CustomButton>
                     <CustomButton
                         color="secondary"
-                        onClick={() => handleDelete(params.row.id)}
+                        onClick={() => {
+                            setFuncionarioDelete(params.row);
+                            setOpenDeleteDialog(true);
+                        }}
                         style={{ width: '85px' }}
                     >
                         Deletar
@@ -86,7 +91,10 @@ const Funcionarios = () => {
                         sx={{ border: 0 }}
                     />
                 </Paper>
-                <Dialog open={openEditDialog} onClose={() => setOpenEditDialog(false)}>
+                <Dialog 
+                    open={openEditDialog} 
+                    onClose={() => setOpenEditDialog(false)}
+                >
                     <DialogTitle>Editar Funcionário</DialogTitle>
                     <DialogContent>
                         <TextField
@@ -127,6 +135,32 @@ const Funcionarios = () => {
                             setOpenEditDialog(false);
                         }}>
                             Salvar
+                        </CustomButton>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={openDeleteDialog}
+                    onClose={() => setOpenDeleteDialog(false)}
+                >
+                    <DialogTitle>Confirmar Exclusão</DialogTitle>
+                    <DialogContent>
+                        Tem certeza de que deseja deletar o funcionário{' '}
+                        <strong>{funcionarioDelete?.nome}</strong>?
+                    </DialogContent>
+                    <DialogActions>
+                        <CustomButton onClick={() => setOpenDeleteDialog(false)}>
+                            Cancelar
+                        </CustomButton>
+                        <CustomButton
+                            color="secondary"
+                            onClick={() => {
+                                if (funcionarioDelete) {
+                                    handleDelete(funcionarioDelete.id);
+                                }
+                                setOpenDeleteDialog(false);
+                            }}
+                        >
+                            Confirmar
                         </CustomButton>
                     </DialogActions>
                 </Dialog>

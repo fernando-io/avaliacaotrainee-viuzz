@@ -17,13 +17,9 @@ export const useFuncionariosHandler = () => {
 
     const handleDelete = (id: number) => {
         const updatedFuncionarios = funcionarios.filter(funcionario => funcionario.id !== id);
-        showAlert('Funcionário deletado com sucesso!', 'warning');
+        showAlert('Funcionário deletado com sucesso!', 'success');
         setFuncionarios(updatedFuncionarios);
         localStorage.setItem('funcionarios', JSON.stringify(updatedFuncionarios));
-    };
-
-    const handleEdit = (funcionario: Funcionario) => {
-        return funcionario;
     };
 
     const handleUpdate = (funcionarioEdit: Partial<Funcionario>) => {
@@ -39,7 +35,6 @@ export const useFuncionariosHandler = () => {
         funcionarios,
         cidades,
         handleDelete,
-        handleEdit,
         handleUpdate
     };
 };
