@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Typography, Grid2, Paper, Dialog, DialogActions, DialogContent, DialogTitle, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { Funcionario } from '../../interfaces/interfaces';
+import { Typography, Grid2, Paper, Dialog, DialogActions, DialogContent, DialogTitle, TextField, FormControl } from '@mui/material';
+import { Funcionario, Cidade } from '../../interfaces/interfaces';
 import { useFuncionariosHandler } from './funcionariosHandler';
-import { CustomButton } from '../../components/button/customButton';
-import NavBar from '../../components/navBar/navBar';
+import { CustomButton } from '../../components/customButton';
+import NavBar from '../../components/navBar';
+import Asynchronous from '../../components/autoComplete';
 
 const Funcionarios = () => {
-    const { funcionarios, cidades, handleDelete, handleUpdate } = useFuncionariosHandler();
+    const { funcionarios, handleDelete, handleUpdate } = useFuncionariosHandler();
     const [openEditDialog, setOpenEditDialog] = useState(false);
     const [funcionarioEdit, setFuncionarioEdit] = useState<Partial<Funcionario>>({});
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
@@ -91,8 +92,8 @@ const Funcionarios = () => {
                         sx={{ border: 0 }}
                     />
                 </Paper>
-                <Dialog 
-                    open={openEditDialog} 
+                <Dialog
+                    open={openEditDialog}
                     onClose={() => setOpenEditDialog(false)}
                 >
                     <DialogTitle>Editar Funcionário</DialogTitle>
@@ -104,20 +105,11 @@ const Funcionarios = () => {
                             value={funcionarioEdit.nome || ''}
                             onChange={(e) => setFuncionarioEdit({ ...funcionarioEdit, nome: e.target.value })}
                         />
-                        <FormControl fullWidth margin="dense" required>
-                            <InputLabel>Cidade</InputLabel>
-                            <Select
-                                label="Cidade"
-                                value={funcionarioEdit.cidade || ''}
-                                onChange={(e) => setFuncionarioEdit({ ...funcionarioEdit, cidade: e.target.value })}
-                            >
-                                {cidades.map((item) => (
-                                    <MenuItem key={item.id} value={item.nome}>
-                                        {item.nome}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                        <Asynchronous
+                            onChange={(cidade: Cidade | null) => {
+                                setFuncionarioEdit({ ...funcionarioEdit, cidade: cidade ? cidade.nome : undefined });
+                            }}
+                        />
                         <TextField
                             label="Cargo"
                             fullWidth

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { LoginProps } from '../../interfaces/interfaces'
 import { useLoginHandler } from './loginHandler';
-import { CustomButton } from '../../components/button/customButton';
+import { CustomButton } from '../../components/customButton';
 import { Grid2, Typography, Box, TextField } from '@mui/material';
 
 const Login: React.FC<LoginProps> = ({ loginFn }) => {

@@ -1,32 +1,36 @@
-// cadastro.tsx
 import React, { useState } from 'react';
-import { Grid2, Typography, Box, TextField, FormControl, Autocomplete, InputLabel, Select, MenuItem } from '@mui/material';
+import { Grid2, Typography, Box, TextField, FormControl } from '@mui/material';
 import { useCadastroHandler } from './cadastroHandler';
-import { CustomButton } from '../../components/button/customButton';
-import NavBar from '../../components/navBar/navBar';
+import { CustomButton } from '../../components/customButton';
+import NavBar from '../../components/navBar';
 import { useAlert } from '../../contexts/alertContext';
-import { useIbgeApi } from '../../hooks/ibgeApi';
+import Asynchronous from '../../components/autoComplete';
+import { Cidade } from '../../interfaces/interfaces';
 
 const Cadastro: React.FC = () => {
     const [nome, setNome] = useState('');
-    const [cidade, setCidade] = useState('');
+    const [cidade, setCidade] = useState<Cidade | null>(null);
     const [cargo, setCargo] = useState('');
-    const { cidades, cadastrarFuncionario } = useCadastroHandler();
+    const { cadastrarFuncionario } = useCadastroHandler();
     const { showAlert } = useAlert();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        cadastrarFuncionario(nome, cidade, cargo);
-        showAlert('Funcionário cadastrado com sucesso!\nVá até a lista de funcionários para visualizá-lo.', 'success');
-        setNome('');
-        setCidade('');
-        setCargo('');
+        if (cidade) {
+            cadastrarFuncionario(nome, cidade.nome, cargo);
+            showAlert('Funcionário cadastrado com sucesso!\nVá até a lista de funcionários para visualizá-lo.', 'success');
+            setNome('');
+            setCidade(null);
+            setCargo('');
+        } else {
+            showAlert('Por favor, selecione uma cidade.', 'error');
+        }
     };
 
     return (
         <>
             <NavBar />
-            <Grid2 container spacing={1} display="flex" direction="column" justifyContent="center" alignItems="center" sx={{minHeight: '80vh'}}>
+            <Grid2 container spacing={1} display="flex" direction="column" justifyContent="center" alignItems="center" sx={{ minHeight: '80vh' }}>
                 <Typography variant="h4" gutterBottom>Cadastre um Novo Funcionário</Typography>
                 <Box component="form" onSubmit={handleSubmit} sx={{ width: '400px' }}>
                     <Grid2 container spacing={1} direction="column">
@@ -41,29 +45,7 @@ const Cadastro: React.FC = () => {
                             />
                         </Grid2>
                         <Grid2>
-                            <FormControl fullWidth required>
-                                {/* <Autocomplete 
-                                    disablePortal
-                                    options={cidades}
-                                    sx={{ width: 300 }}
-                                    renderInput={(params) => <TextField {...params} label="Cidade" />}
-                                /> */}
-                                <InputLabel>Cidade</InputLabel>
-                                <Select
-                                    label="Cidade"
-                                    value={cidade}
-                                    onChange={(e) => setCidade(e.target.value)}
-                                >
-                                    {cidades.map((item) => (
-                                        <MenuItem
-                                            key={item.id}
-                                            value={item.nome}
-                                        >
-                                            {item.nome}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                            <Asynchronous onChange={(cidade: Cidade | null) => setCidade(cidade)} />
                         </Grid2>
                         <Grid2>
                             <TextField
@@ -82,8 +64,8 @@ const Cadastro: React.FC = () => {
                             >
                                 Cadastrar
                             </CustomButton>
-                        </Grid2>    
-                    </Grid2>           
+                        </Grid2>
+                    </Grid2>
                 </Box>
             </Grid2>
         </>
