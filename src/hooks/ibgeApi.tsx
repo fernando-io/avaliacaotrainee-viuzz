@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Cidade } from '../interfaces/interfaces';
+
+export interface Cidade {
+    id: number;
+    nome: string;
+}
 
 export const useIbgeApi = () => {
     const [cidades, setCidades] = useState<Cidade[]>([]);

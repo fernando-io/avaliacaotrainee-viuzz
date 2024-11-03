@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Funcionario } from '../../interfaces/interfaces';
+import { Funcionario } from '../cadastro/cadastro';
 import { useAlert } from '../../contexts/alertContext';
 import { useIbgeApi } from '../../hooks/ibgeApi';
 

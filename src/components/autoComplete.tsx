@@ -2,8 +2,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Cidade } from '../interfaces/interfaces';
-import { useIbgeApi } from '../hooks/ibgeApi';
+import { Cidade, useIbgeApi } from '../hooks/ibgeApi';
 
 function sleep(duration: number): Promise<void> {
     return new Promise<void>((resolve) => {

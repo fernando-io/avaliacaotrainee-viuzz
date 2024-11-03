@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Typography, Grid2, Paper, Dialog, DialogActions, DialogContent, DialogTitle, TextField, FormControl } from '@mui/material';
-import { Funcionario, Cidade } from '../../interfaces/interfaces';
+import { Typography, Grid2, Paper, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { Funcionario } from '../cadastro/cadastro';
+import { Cidade } from '../../hooks/ibgeApi';
 import { useFuncionariosHandler } from './funcionariosHandler';
 import { CustomButton } from '../../components/customButton';
 import NavBar from '../../components/navBar';
