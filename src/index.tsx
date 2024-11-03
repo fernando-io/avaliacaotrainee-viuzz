@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

@@ -1,7 +1,3 @@
-export interface LoginProps {
-    loginFn: () => void;
-}
-
 export interface Funcionario {
     id: number;
     nome: string;
