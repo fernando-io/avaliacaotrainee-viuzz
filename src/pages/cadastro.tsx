@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Grid2, Typography, Box, TextField } from '@mui/material';
-import { CustomButton } from '../../components/customButton';
-import NavBar from '../../components/navBar';
-import { useAlert } from '../../contexts/alertContext';
-import Asynchronous from '../../components/autoComplete';
-import { Cidade } from '../../hooks/ibgeApi';
+import { CustomButton } from '../components/customButton';
+import NavBar from '../components/navBar';
+import { useAlert } from '../contexts/alertContext';
+import CidadesAutocomplete from '../components/autoComplete';
+import { Cidade } from '../hooks/ibgeApi';
 
 export interface Funcionario {
     id: number;
@@ -18,10 +18,11 @@ const Cadastro: React.FC = () => {
         nome: '',
         cidade: null as Cidade | null,
         cargo: ''
-    })
+    });
+
     const { showAlert } = useAlert();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleRegister = (e: React.FormEvent) => {
         e.preventDefault();
 
         if (formData.cidade) {
@@ -31,6 +32,7 @@ const Cadastro: React.FC = () => {
                 cidade: formData.cidade.nome,
                 cargo: formData.cargo,
             });
+
             showAlert('Funcionário cadastrado com sucesso!\nVá até a lista de funcionários para visualizá-lo.', 'success');
             setFormData({ nome: '', cidade: null, cargo: '' });
         } else {
@@ -40,6 +42,7 @@ const Cadastro: React.FC = () => {
 
     const cadastrarFuncionario = (funcionario: Funcionario) => {
         const listaDeFuncionarios: Funcionario[] = JSON.parse(localStorage.getItem('funcionarios') || '[]');
+
         listaDeFuncionarios.push(funcionario);
         localStorage.setItem('funcionarios', JSON.stringify(listaDeFuncionarios));
     };
@@ -63,7 +66,7 @@ const Cadastro: React.FC = () => {
                 </Typography>
                 <Box
                     component="form"
-                    onSubmit={handleSubmit}
+                    onSubmit={handleRegister}
                     sx={{ width: '400px' }}
                 >
                     <Grid2
@@ -82,7 +85,7 @@ const Cadastro: React.FC = () => {
                             />
                         </Grid2>
                         <Grid2>
-                            <Asynchronous
+                            <CidadesAutocomplete
                                 onChange={(cidade) => setFormData({ ...formData, cidade })}
                             />
                         </Grid2>

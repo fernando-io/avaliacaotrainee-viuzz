@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress'; 
 import { Cidade, useIbgeApi } from '../hooks/ibgeApi';
 
 function sleep(duration: number): Promise<void> {
@@ -12,11 +12,11 @@ function sleep(duration: number): Promise<void> {
     });
 }
 
-interface AsynchronousProps {
+interface CidadesAutocompleteProps {
     onChange: (cidade: Cidade | null) => void;
 }
 
-export default function Asynchronous({ onChange }: AsynchronousProps) {
+export default function CidadesAutocomplete({ onChange }: CidadesAutocompleteProps) {
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState<readonly Cidade[]>([]);
     const [loading, setLoading] = React.useState(false);
@@ -28,7 +28,6 @@ export default function Asynchronous({ onChange }: AsynchronousProps) {
             setLoading(true);
             await sleep(1e3);
             setLoading(false);
-
             setOptions([...cidades]);
         })();
     };

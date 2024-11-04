@@ -23,18 +23,20 @@ export const AlertProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return (
         <AlertContext.Provider value={{ showAlert }}>
             {children}
-            {alert && <Alert
-                severity={alert.severity}
-                sx={{
-                    position: 'fixed',
-                    top: '100px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    zIndex: 9999,
-                }}
-            >
-                {alert.message}
-            </Alert>}
+            {alert && (
+                <Alert
+                    severity={alert.severity}
+                    sx={{
+                        position: 'fixed',
+                        top: '100px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        zIndex: 9999,
+                    }}
+                >
+                    {alert.message}
+                </Alert>
+            )}
         </AlertContext.Provider>
     );
 };

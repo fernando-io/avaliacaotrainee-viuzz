@@ -21,7 +21,8 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
     return (
         <Button
             variant={variant}
-            color={color} type={type}
+            color={color}
+            type={type}
             style={style}
             onClick={onClick}
         >

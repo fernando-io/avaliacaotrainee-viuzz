@@ -18,6 +18,7 @@ export const useIbgeApi = () => {
                 .then((data: Cidade[]) => {
                     const cidadesOrdenadas = data.sort((a, b) => (a.nome < b.nome) ? -1 : 1);
                     setCidades(cidadesOrdenadas);
+                    localStorage.setItem('cidades', JSON.stringify(cidadesOrdenadas));
                 })
                 .catch(error => console.error('Erro ao buscar cidade', error));
         }
